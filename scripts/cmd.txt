@@ -1,0 +1,8 @@
+ls=ls -l
+edit=nano /home/abdallah/Documents/YOCTO/poky/meta-live/recipes-example/example-image/example-image
+image=cd /home/abdallah/Documents/YOCTO/build/tmp/deploy/images/qemuarm
+image-name=core-image-minimal-qemuarm.tar.bz2
+build=bitbake example-image
+run=runqemu qemuarm example-image nographic
+resize=sudo sysctl -n -w fs.inotify.max_user_watches=70000
+

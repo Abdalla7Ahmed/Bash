@@ -1,0 +1,31 @@
+#!/bin/bash
+
+BATTERY_S=`acpi -b`
+
+read -a BATTERY_Array <<< ${BATTERY_S}
+
+BATTERY_Val=${BATTERY_Array[3]::-1}
+
+tmp=`echo ${BATTERY_Val} | grep "%" `
+if [ $? -eq 0 ]
+then
+	BATTERY_Val=${BATTERY_Val::-1}
+fi
+
+while [ true ]
+do
+	tmp=`acpi -a | grep "on" `
+	tmp=$?
+	if [ ${tmp} -ne 0 ] && [ ${BATTERY_Val} -lt 50 ] 
+	then
+	notify-send "note that the battedry is less than 50%"
+	notify-send "please connect the charger "	
+	sleep 10
+	fi
+	acpi -a | grep "on"
+	if [ $? -eq 0 ]
+	then
+	notify-send "Your charger is connected and the battery is ${BATTERY_Val}% "
+	break
+	fi
+done

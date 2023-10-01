@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#tldr command        --> most examples used with this command
+
+
+path="/home/abdallah/Documents/Linux/Moatasem_Elsayed/Bash_Script/bash"
+file_name="21-path.txt"
+read_file=`cat ${path}/${file_name}`
+
+
+selected_value=`echo -e "${read_file[@]}" | rofi -dmenu -p "select/add"`
+
+
+if [ ${selected_value} = "add" ]
+then 
+       selected_value=`	echo -e | rofi -dmenu -p "add path"`
+	if [  -n "${selected_value}" ]
+	then
+		touch ${selected_value}
+		echo "${selected_value}" >> ${path}/${file_name}
+		answer=` echo -e | rofi -dmenu -p "do you want to open it ? Y/N"`
+		if [ "${answer}" = "Y" ]
+		then
+			code ${selected_value}
+		fi
+	fi
+elif [ -n "${selected_value}" ]
+then
+
+	code ${selected_value}
+
+fi
