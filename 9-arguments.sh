@@ -26,7 +26,7 @@ else
         echo "wrong command"
 
 fi 
-# the output will be welcome
+# the output will be welcome if the command succedded 
 # ========================== example 2 ============================== 
 rea=d -p "enter your name " name
 if [ $? -eq 0 ] 
@@ -36,7 +36,7 @@ else
 	echo "wrong command"
 fi 
 
-# the output will be wrong command
+# the output will be wrong command if the command failed
 
 # ========================== example 3 ============================== 
 #the diff between $@ and $*
